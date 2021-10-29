@@ -8,6 +8,7 @@ import org.libreapps.imagesearcher.R
 import org.libreapps.imagesearcher.model.Image
 import org.libreapps.imagesearcher.model.PixabayApiClient
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class ImagesActivity : AppCompatActivity() {
@@ -26,7 +27,7 @@ class ImagesActivity : AppCompatActivity() {
         getImages(inputText)
     }
 
-    fun getImages(inputText : String){
+    private fun getImages(inputText : String){
 
         val query: String = inputText
         val language: String = "en"
@@ -43,7 +44,8 @@ class ImagesActivity : AppCompatActivity() {
         val page: Int = 1
         val perPage: Int = 20
 
-        PixabayApiClient.pixabayApiService.getImages(query, language, imageType, orientation, minWidth, minHeight, editorsChoice, safeSearch, order, page, perPage).enqueue(object: Callback<List<Image>>{
+        PixabayApiClient.pixabayApiService.getImages(query, language, imageType, orientation, minWidth, minHeight, editorsChoice, safeSearch, order, page, perPage).enqueue(object:
+            Callback<List<Image>> {
             override fun onResponse(
                 call: Call<List<Image>>,
                 response: Response<List<Image>>
